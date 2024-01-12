@@ -12,7 +12,7 @@ data class Customer(
     @Column(nullable = false)
     var lastName: String = "",
     @Column(nullable = false)
-    val cpf: String,
+    var cpf: String = "",
     @Column(nullable = false, unique = true)
     var email: String = "",
     @Column(nullable = false)
