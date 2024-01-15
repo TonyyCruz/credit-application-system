@@ -1,10 +1,9 @@
 package com.tonyycruz.credit.application.system.dto
 
-import com.tonyycruz.credit.application.system.entity.Address
 import com.tonyycruz.credit.application.system.entity.Customer
 import java.math.BigDecimal
 
-data class CustomerViewDto(
+data class CustomerView(
     val firstName: String,
     val lastName: String,
     val cpf: String,

@@ -2,10 +2,9 @@ package com.tonyycruz.credit.application.system.controller
 
 import com.tonyycruz.credit.application.system.dto.CustomerDto
 import com.tonyycruz.credit.application.system.dto.CustomerUpdateDto
-import com.tonyycruz.credit.application.system.dto.CustomerViewDto
+import com.tonyycruz.credit.application.system.dto.CustomerView
 import com.tonyycruz.credit.application.system.entity.Customer
 import com.tonyycruz.credit.application.system.service.impl.CustomerService
-import jakarta.websocket.server.PathParam
 import org.springframework.http.HttpEntity
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -29,9 +28,9 @@ class CustomerController(private val customerService: CustomerService) {
     }
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable id: Long): ResponseEntity<CustomerViewDto> {
+    fun findById(@PathVariable id: Long): ResponseEntity<CustomerView> {
         val customer: Customer = customerService.findById(id)
-        return ResponseEntity.ok().body(CustomerViewDto(customer))
+        return ResponseEntity.ok().body(CustomerView(customer))
     }
 
     @DeleteMapping("/{id}")
@@ -44,9 +43,9 @@ class CustomerController(private val customerService: CustomerService) {
     fun update(
         @PathVariable id: Long,
         @RequestBody customerUpdateDto: CustomerUpdateDto
-    ): ResponseEntity<CustomerViewDto> {
+    ): ResponseEntity<CustomerView> {
         val customer: Customer = customerService.findById(id)
         val updatedCustom: Customer = customerService.save(customerUpdateDto.toEntity(customer))
-        return ResponseEntity.ok().body(CustomerViewDto(updatedCustom))
+        return ResponseEntity.ok().body(CustomerView(updatedCustom))
     }
 }
