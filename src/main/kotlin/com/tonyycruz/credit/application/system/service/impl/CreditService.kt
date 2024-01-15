@@ -21,15 +21,15 @@ class CreditService(
         return creditRepository.save(credit)
     }
 
-    override fun findAllByCustomerId(customerId: Long): List<Credit> {
-        return creditRepository.findAllByCustomerId(customerId)
+    override fun findAllByCustomerId(id: Long): List<Credit> {
+        return creditRepository.findAllByCustomerId(id)
     }
 
-    override fun findByCreditCode(customerId: Long, creditCode: UUID): Credit {
+    override fun findByCreditCode(id: Long, creditCode: UUID): Credit {
         val credit: Credit = creditRepository.findByCreditCode(creditCode).orElseThrow {
             throw RuntimeException("You do not have permission to access this credit.")
         }
-        if (customerId != credit.customer!!.id) {
+        if (id != credit.customer?.id) {
             throw RuntimeException("You do not have permission to access this credit.")
         }
         return credit

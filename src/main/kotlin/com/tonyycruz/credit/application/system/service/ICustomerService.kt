@@ -5,6 +5,6 @@ import org.apache.catalina.Service
 
 interface ICustomerService {
     fun save(customer: Customer): Customer
-    fun findById(customerId: Long): Customer
-    fun delete(customerId: Long)
+    fun findById(id: Long): Customer
+    fun delete(id: Long)
 }

@@ -12,14 +12,14 @@ class CustomerService(private val customerRepository: CustomerRepository) : ICus
         return customerRepository.save(customer)
     }
 
-    override fun findById(customerId: Long): Customer {
-        return customerRepository.findById(customerId).orElseThrow {
-            throw RuntimeException("Id '$customerId' was not found.")
+    override fun findById(id: Long): Customer {
+        return customerRepository.findById(id).orElseThrow {
+            throw RuntimeException("Id '$id' was not found.")
         }
     }
 
-    override fun delete(customerId: Long) {
-        customerRepository.deleteById(customerId)
+    override fun delete(id: Long) {
+        customerRepository.deleteById(id)
     }
 }
 
