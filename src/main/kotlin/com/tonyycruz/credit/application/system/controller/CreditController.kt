@@ -5,6 +5,7 @@ import com.tonyycruz.credit.application.system.dto.CreditView
 import com.tonyycruz.credit.application.system.dto.CreditViewList
 import com.tonyycruz.credit.application.system.entity.Credit
 import com.tonyycruz.credit.application.system.service.impl.CreditService
+import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -22,7 +23,7 @@ import java.util.UUID
 class CreditController(private val creditService: CreditService) {
 
     @PostMapping
-    fun save(@RequestBody creditDto: CreditDto): ResponseEntity<String> {
+    fun save(@RequestBody @Valid creditDto: CreditDto): ResponseEntity<String> {
         val credit: Credit = creditService.save(creditDto.toEntity())
         val responseMsg = "Credit successfully created!\n" +
                 "code: ${credit.creditCode}\n" +
