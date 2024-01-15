@@ -6,6 +6,7 @@ import com.tonyycruz.credit.application.system.dto.CustomerView
 import com.tonyycruz.credit.application.system.entity.Customer
 import com.tonyycruz.credit.application.system.service.impl.CustomerService
 import org.springframework.http.HttpEntity
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -24,13 +25,13 @@ class CustomerController(private val customerService: CustomerService) {
     fun save(@RequestBody customerDto: CustomerDto): ResponseEntity<String> {
         val newCustomer: Customer = customerService.save(customerDto.toEntity())
         val createdMsg: String = "Customer ${newCustomer.email} saved!"
-        return ResponseEntity.ok().body(createdMsg)
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdMsg)
     }
 
     @GetMapping("/{id}")
     fun findById(@PathVariable id: Long): ResponseEntity<CustomerView> {
         val customer: Customer = customerService.findById(id)
-        return ResponseEntity.ok().body(CustomerView(customer))
+        return ResponseEntity.ok(CustomerView(customer))
     }
 
     @DeleteMapping("/{id}")
@@ -46,6 +47,6 @@ class CustomerController(private val customerService: CustomerService) {
     ): ResponseEntity<CustomerView> {
         val customer: Customer = customerService.findById(id)
         val updatedCustom: Customer = customerService.save(customerUpdateDto.toEntity(customer))
-        return ResponseEntity.ok().body(CustomerView(updatedCustom))
+        return ResponseEntity.ok(CustomerView(updatedCustom))
     }
 }

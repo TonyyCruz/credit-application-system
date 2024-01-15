@@ -5,6 +5,7 @@ import com.tonyycruz.credit.application.system.dto.CreditView
 import com.tonyycruz.credit.application.system.dto.CreditViewList
 import com.tonyycruz.credit.application.system.entity.Credit
 import com.tonyycruz.credit.application.system.service.impl.CreditService
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -26,7 +27,7 @@ class CreditController(private val creditService: CreditService) {
                 "code: ${credit.creditCode}," +
                 "customer: ${credit.customer?.firstName}," +
                 "value: ${credit.creditValue}"
-        return ResponseEntity.ok().body(responseMsg)
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseMsg)
     }
 
     @GetMapping
@@ -34,7 +35,7 @@ class CreditController(private val creditService: CreditService) {
         val creditViewList: List<CreditViewList> = creditService
             .findAllByCustomerId(customerId)
             .map { credit: Credit -> CreditViewList(credit) }
-        return ResponseEntity.ok().body(creditViewList)
+        return ResponseEntity.ok(creditViewList)
     }
 
     @GetMapping("/{creditCode}")
@@ -42,6 +43,6 @@ class CreditController(private val creditService: CreditService) {
         @RequestParam("customerId") customerId: Long,
         @PathVariable creditCode: UUID): ResponseEntity<CreditView> {
         val credit: Credit = creditService.findByCreditCode(customerId, creditCode)
-        return ResponseEntity.ok().body(CreditView(credit))
+        return ResponseEntity.ok(CreditView(credit))
     }
 }
