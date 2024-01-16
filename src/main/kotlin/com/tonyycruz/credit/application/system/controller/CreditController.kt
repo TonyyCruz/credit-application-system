@@ -5,11 +5,13 @@ import com.tonyycruz.credit.application.system.dto.CreditView
 import com.tonyycruz.credit.application.system.dto.CreditViewList
 import com.tonyycruz.credit.application.system.entity.Credit
 import com.tonyycruz.credit.application.system.service.impl.CreditService
+import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -20,13 +22,13 @@ import java.util.UUID
 @RequestMapping("/api/credits")
 class CreditController(private val creditService: CreditService) {
 
-    @PatchMapping
-    fun save(@RequestBody creditDto: CreditDto): ResponseEntity<String> {
+    @PostMapping
+    fun save(@RequestBody @Valid creditDto: CreditDto): ResponseEntity<String> {
         val credit: Credit = creditService.save(creditDto.toEntity())
-        val responseMsg = "Credit successfully created!" +
-                "code: ${credit.creditCode}," +
-                "customer: ${credit.customer?.firstName}," +
-                "value: ${credit.creditValue}"
+        val responseMsg = "Credit successfully created!\n" +
+                "code: ${credit.creditCode}\n" +
+                "customer: ${credit.customer?.firstName}\n" +
+                "value: ${credit.creditValue}\n"
         return ResponseEntity.status(HttpStatus.CREATED).body(responseMsg)
     }
 

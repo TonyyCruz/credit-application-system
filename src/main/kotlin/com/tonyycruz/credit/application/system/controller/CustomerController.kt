@@ -5,6 +5,7 @@ import com.tonyycruz.credit.application.system.dto.CustomerUpdateDto
 import com.tonyycruz.credit.application.system.dto.CustomerView
 import com.tonyycruz.credit.application.system.entity.Customer
 import com.tonyycruz.credit.application.system.service.impl.CustomerService
+import jakarta.validation.Valid
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -22,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController
 class CustomerController(private val customerService: CustomerService) {
 
     @PostMapping
-    fun save(@RequestBody customerDto: CustomerDto): ResponseEntity<String> {
+    fun save(@RequestBody @Valid customerDto: CustomerDto): ResponseEntity<String> {
         val newCustomer: Customer = customerService.save(customerDto.toEntity())
         val createdMsg: String = "Customer ${newCustomer.email} saved!"
         return ResponseEntity.status(HttpStatus.CREATED).body(createdMsg)
@@ -35,15 +37,13 @@ class CustomerController(private val customerService: CustomerService) {
     }
 
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable id: Long): HttpEntity<*> {
-        customerService.delete(id)
-        return ResponseEntity.EMPTY
-    }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun delete(@PathVariable id: Long) = customerService.delete(id)
 
     @PatchMapping("/{id}")
     fun update(
         @PathVariable id: Long,
-        @RequestBody customerUpdateDto: CustomerUpdateDto
+        @RequestBody @Valid customerUpdateDto: CustomerUpdateDto
     ): ResponseEntity<CustomerView> {
         val customer: Customer = customerService.findById(id)
         val updatedCustom: Customer = customerService.save(customerUpdateDto.toEntity(customer))
