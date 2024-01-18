@@ -1,15 +1,14 @@
 package com.tonyycruz.credit.application.system.controller
 
-import com.tonyycruz.credit.application.system.dto.CreditDto
-import com.tonyycruz.credit.application.system.dto.CreditView
-import com.tonyycruz.credit.application.system.dto.CreditViewList
+import com.tonyycruz.credit.application.system.dto.request.CreditDto
+import com.tonyycruz.credit.application.system.dto.response.CreditView
+import com.tonyycruz.credit.application.system.dto.response.CreditViewList
 import com.tonyycruz.credit.application.system.entity.Credit
 import com.tonyycruz.credit.application.system.service.impl.CreditService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody

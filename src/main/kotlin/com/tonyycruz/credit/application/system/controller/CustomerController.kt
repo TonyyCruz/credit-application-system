@@ -1,12 +1,11 @@
 package com.tonyycruz.credit.application.system.controller
 
-import com.tonyycruz.credit.application.system.dto.CustomerDto
-import com.tonyycruz.credit.application.system.dto.CustomerUpdateDto
-import com.tonyycruz.credit.application.system.dto.CustomerView
+import com.tonyycruz.credit.application.system.dto.request.CustomerDto
+import com.tonyycruz.credit.application.system.dto.request.CustomerUpdateDto
+import com.tonyycruz.credit.application.system.dto.response.CustomerView
 import com.tonyycruz.credit.application.system.entity.Customer
 import com.tonyycruz.credit.application.system.service.impl.CustomerService
 import jakarta.validation.Valid
-import org.springframework.http.HttpEntity
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
