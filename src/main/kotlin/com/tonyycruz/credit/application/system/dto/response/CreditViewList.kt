@@ -1,4 +1,4 @@
-package com.tonyycruz.credit.application.system.dto
+package com.tonyycruz.credit.application.system.dto.response
 
 import com.tonyycruz.credit.application.system.entity.Credit
 import java.math.BigDecimal
