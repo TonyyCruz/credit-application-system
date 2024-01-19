@@ -27,14 +27,14 @@ class CustomerServiceTest {
     }
 
     fun buildCustomer(
-        firstName: String = "Cami",
-        lastName: String = "Cavalcante",
+        firstName: String = "Tony",
+        lastName: String = "Cruz",
         cpf: String = "28475934625",
-        email: String = "camila@gmail.com",
-        password: String = "12345",
-        zipCode: String = "12345",
-        street: String = "Rua da Cami",
-        income: BigDecimal = BigDecimal.valueOf(1000.0),
+        email: String = "tony@email.com",
+        password: String = "123456789",
+        zipCode: String = "123456789",
+        street: String = "Alameda dos Anjos",
+        income: BigDecimal = BigDecimal.valueOf(4500.0),
         id: Long = 1L
     ) = Customer(
         firstName = firstName,
