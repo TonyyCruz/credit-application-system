@@ -29,7 +29,7 @@ class CustomerServiceTest {
     @Test
     fun `Should create a customer`() {
         val fakeCustomer: Customer = buildCustomer()
-        every { customerRepository.save(any()) } returns fakeCustomer
+        every { customerRepository.save(fakeCustomer) } returns fakeCustomer
         val current: Customer = customerService.save(fakeCustomer)
 
         Assertions.assertThat(current).isNotNull()

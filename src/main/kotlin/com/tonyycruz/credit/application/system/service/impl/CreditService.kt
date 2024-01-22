@@ -12,8 +12,8 @@ import java.util.*
 @Service
 class CreditService(
     private val creditRepository: CreditRepository,
-    private val customerService: CustomerService, private val customerRepository: CustomerRepository
-): ICreditService {
+    private val customerService: CustomerService,
+) : ICreditService {
 
     override fun save(credit: Credit): Credit {
         credit.apply {
@@ -31,7 +31,7 @@ class CreditService(
             throw UnauthorizedException("You do not have permission to access this credit.")
         }
         if (id != credit.customer?.id) {
-            throw UnauthorizedException(message =  "You do not have permission to access this credit.")
+            throw UnauthorizedException(message = "You do not have permission to access this credit.")
         }
         return credit
     }
