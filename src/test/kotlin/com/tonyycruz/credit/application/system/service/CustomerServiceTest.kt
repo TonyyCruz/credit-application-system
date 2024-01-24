@@ -51,7 +51,7 @@ class CustomerServiceTest {
     }
 
     @Test
-    fun `Should not find a customer by invalid id and throws an exception`() {
+    fun `Should not find a customer with invalid id and throws an exception`() {
         val fakeId: Long = Random.nextLong()
         every { customerRepository.findById(fakeId) } returns Optional.empty()
 

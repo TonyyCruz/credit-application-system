@@ -2,6 +2,7 @@ package com.tonyycruz.credit.application.system.service.impl
 
 import com.tonyycruz.credit.application.system.entity.Credit
 import com.tonyycruz.credit.application.system.entity.Customer
+import com.tonyycruz.credit.application.system.exception.NotFoundException
 import com.tonyycruz.credit.application.system.exception.UnauthorizedException
 import com.tonyycruz.credit.application.system.repository.CreditRepository
 import com.tonyycruz.credit.application.system.repository.CustomerRepository
@@ -28,7 +29,7 @@ class CreditService(
 
     override fun findByCreditCode(id: Long, creditCode: UUID): Credit {
         val credit: Credit = creditRepository.findByCreditCode(creditCode).orElseThrow {
-            throw UnauthorizedException("You do not have permission to access this credit.")
+            throw NotFoundException("Credit code: $creditCode was not found.")
         }
         if (id != credit.customer?.id) {
             throw UnauthorizedException(message = "You do not have permission to access this credit.")
