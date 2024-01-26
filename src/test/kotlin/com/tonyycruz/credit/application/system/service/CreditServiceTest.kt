@@ -7,6 +7,7 @@ import com.tonyycruz.credit.application.system.exception.UnauthorizedException
 import com.tonyycruz.credit.application.system.repository.CreditRepository
 import com.tonyycruz.credit.application.system.service.impl.CreditService
 import com.tonyycruz.credit.application.system.service.impl.CustomerService
+import com.tonyycruz.credit.application.system.utils.FakeEntitiesBuild
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
@@ -15,15 +16,11 @@ import io.mockk.verify
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.springframework.test.context.ActiveProfiles
-import java.math.BigDecimal
-import java.time.LocalDate
 import java.util.*
 import kotlin.random.Random
 
-@ActiveProfiles("test")
 @ExtendWith(MockKExtension::class)
-class CreditServiceTest {
+class CreditServiceTest: FakeEntitiesBuild() {
     @MockK lateinit var creditRepository: CreditRepository
     @InjectMockKs lateinit var creditService: CreditService
     @MockK lateinit var customerService: CustomerService
@@ -32,7 +29,7 @@ class CreditServiceTest {
     fun `Should create a credit`() {
         val fakeCredit: Credit = buildCredit(customerId = 1)
         val fakeCustomer: Customer = Customer(id = 1)
-        every { customerService.findById(fakeCredit.customer?.id as Long) } returns fakeCustomer
+        every { customerService.findById(fakeCredit.customer?.id!!) } returns fakeCustomer
         every { creditRepository.save(fakeCredit) } returns fakeCredit
         val current = creditService.save(fakeCredit)
 
@@ -88,25 +85,4 @@ class CreditServiceTest {
             .withMessage("You do not have permission to access this credit.")
         verify(exactly = 1) { creditRepository.findByCreditCode(fakeCredit.creditCode) }
     }
-
-    private fun buildManyCredits(quantity: Int, customerId: Long = 1): List<Credit> {
-        val fakeCreditList: MutableList<Credit> = mutableListOf()
-        repeat(quantity) { fakeCreditList.add(buildCredit(customerId = customerId)) }
-        return fakeCreditList
-    }
-
-    private fun buildCredit(
-        id: Long? = 1L,
-        customerId: Long? = 1L,
-        creditValue: BigDecimal = BigDecimal.valueOf(100.0),
-        dayFirstInstallment: LocalDate = LocalDate.now(),
-        numberOfInstallments: Int = 5
-    ) = Credit(
-        id = id,
-        creditCode = UUID.randomUUID(),
-        creditValue = creditValue,
-        dayFirstInstallment = dayFirstInstallment,
-        numberOfInstallments = numberOfInstallments,
-        customer = Customer(id = customerId)
-    )
 }
