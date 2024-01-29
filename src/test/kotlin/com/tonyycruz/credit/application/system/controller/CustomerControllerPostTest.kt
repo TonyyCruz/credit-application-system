@@ -1,47 +1,13 @@
 package com.tonyycruz.credit.application.system.controller
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.tonyycruz.credit.application.system.dto.request.CustomerDto
-import com.tonyycruz.credit.application.system.mocks.MockEntities
-import com.tonyycruz.credit.application.system.repository.CustomerRepository
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
-import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.ContextConfiguration
-import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
-import java.math.BigDecimal
 
-@SpringBootTest
-@ActiveProfiles("test")
-@AutoConfigureMockMvc
-@ContextConfiguration
-class CustomerControllerTest : MockEntities() {
-    @Autowired
-    private lateinit var customerRepository: CustomerRepository
-
-    @Autowired
-    private lateinit var mockMvc: MockMvc
-
-    @Autowired
-    private lateinit var objectMapper: ObjectMapper
-
-    companion object {
-        const val URL: String = "/api/customers"
-    }
-
-    @BeforeEach
-    fun setup() = customerRepository.deleteAll()
-
-    @AfterEach
-    fun tearDown() = customerRepository.deleteAll()
+class CustomerControllerPostTest : TestBase() {
 
     @Test
     fun `Should create a customer and receive status code 201`() {
@@ -105,15 +71,14 @@ class CustomerControllerTest : MockEntities() {
             )
             .andExpect(MockMvcResultMatchers.jsonPath("$.timestamp").exists())
             .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
-            .andExpect(
-                MockMvcResultMatchers
+            .andExpect(MockMvcResultMatchers
                     .jsonPath("$.exception")
                     .value("class org.springframework.web.bind.MethodArgumentNotValidException")
             )
             .andExpect(MockMvcResultMatchers.jsonPath("$.details[*]").isNotEmpty)
             .andExpect(MockMvcResultMatchers
-                .jsonPath("$.details[*]")
-                .value("Field 'First Name' cannot be empty.")
+                    .jsonPath("$.details[*]")
+                    .value("Field 'First Name' cannot be empty.")
             )
             .andDo(MockMvcResultHandlers.print())
     }
@@ -123,26 +88,25 @@ class CustomerControllerTest : MockEntities() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer(lastName = ""))
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-            .post(URL)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(valueAsString)
+                .post(URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(valueAsString)
         )
             .andExpect(MockMvcResultMatchers.status().isBadRequest)
             .andExpect(MockMvcResultMatchers
-                .jsonPath("$.title")
-                .value("Bad request, invalid argumentation.")
+                    .jsonPath("$.title")
+                    .value("Bad request, invalid argumentation.")
             )
             .andExpect(MockMvcResultMatchers.jsonPath("$.timestamp").exists())
             .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
-            .andExpect(
-                MockMvcResultMatchers
+            .andExpect(MockMvcResultMatchers
                     .jsonPath("$.exception")
                     .value("class org.springframework.web.bind.MethodArgumentNotValidException")
             )
             .andExpect(MockMvcResultMatchers.jsonPath("$.details[*]").isNotEmpty)
             .andExpect(MockMvcResultMatchers
-                .jsonPath("$.details[*]")
-                .value("Field 'Last Name' cannot be empty.")
+                    .jsonPath("$.details[*]")
+                    .value("Field 'Last Name' cannot be empty.")
             )
             .andDo(MockMvcResultHandlers.print())
     }
@@ -152,26 +116,25 @@ class CustomerControllerTest : MockEntities() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer(cpf = ""))
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-            .post(URL)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(valueAsString)
+                .post(URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(valueAsString)
         )
             .andExpect(MockMvcResultMatchers.status().isBadRequest)
             .andExpect(MockMvcResultMatchers
-                .jsonPath("$.title")
-                .value("Bad request, invalid argumentation.")
+                    .jsonPath("$.title")
+                    .value("Bad request, invalid argumentation.")
             )
             .andExpect(MockMvcResultMatchers.jsonPath("$.timestamp").exists())
             .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
-            .andExpect(
-                MockMvcResultMatchers
+            .andExpect(MockMvcResultMatchers
                     .jsonPath("$.exception")
                     .value("class org.springframework.web.bind.MethodArgumentNotValidException")
             )
             .andExpect(MockMvcResultMatchers.jsonPath("$.details[*]").isNotEmpty)
             .andExpect(MockMvcResultMatchers
-                .jsonPath("$.details[*]")
-                .value("Field 'CPF' cannot be empty.")
+                    .jsonPath("$.details[*]")
+                    .value("Invalid CPF.")
             )
             .andDo(MockMvcResultHandlers.print())
     }
@@ -181,26 +144,25 @@ class CustomerControllerTest : MockEntities() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer(cpf = "111111111"))
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-            .post(URL)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(valueAsString)
+                .post(URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(valueAsString)
         )
             .andExpect(MockMvcResultMatchers.status().isBadRequest)
             .andExpect(MockMvcResultMatchers
-                .jsonPath("$.title")
-                .value("Bad request, invalid argumentation.")
+                    .jsonPath("$.title")
+                    .value("Bad request, invalid argumentation.")
             )
             .andExpect(MockMvcResultMatchers.jsonPath("$.timestamp").exists())
             .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
-            .andExpect(
-                MockMvcResultMatchers
+            .andExpect(MockMvcResultMatchers
                     .jsonPath("$.exception")
                     .value("class org.springframework.web.bind.MethodArgumentNotValidException")
             )
             .andExpect(MockMvcResultMatchers.jsonPath("$.details[*]").isNotEmpty)
             .andExpect(MockMvcResultMatchers
-                .jsonPath("$.details[*]")
-                .value("Invalid CPF.")
+                    .jsonPath("$.details[*]")
+                    .value("Invalid CPF.")
             )
             .andDo(MockMvcResultHandlers.print())
     }
@@ -210,26 +172,25 @@ class CustomerControllerTest : MockEntities() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer(email = ""))
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-            .post(URL)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(valueAsString)
+                .post(URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(valueAsString)
         )
             .andExpect(MockMvcResultMatchers.status().isBadRequest)
             .andExpect(MockMvcResultMatchers
-                .jsonPath("$.title")
-                .value("Bad request, invalid argumentation.")
+                    .jsonPath("$.title")
+                    .value("Bad request, invalid argumentation.")
             )
             .andExpect(MockMvcResultMatchers.jsonPath("$.timestamp").exists())
             .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
-            .andExpect(
-                MockMvcResultMatchers
+            .andExpect(MockMvcResultMatchers
                     .jsonPath("$.exception")
                     .value("class org.springframework.web.bind.MethodArgumentNotValidException")
             )
             .andExpect(MockMvcResultMatchers.jsonPath("$.details[*]").isNotEmpty)
             .andExpect(MockMvcResultMatchers
-                .jsonPath("$.details[*]")
-                .value("Field 'Email' cannot be empty.")
+                    .jsonPath("$.details[*]")
+                    .value("Field 'Email' cannot be empty.")
             )
             .andDo(MockMvcResultHandlers.print())
     }
@@ -239,26 +200,25 @@ class CustomerControllerTest : MockEntities() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer(email = "test"))
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-            .post(URL)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(valueAsString)
+                .post(URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(valueAsString)
         )
             .andExpect(MockMvcResultMatchers.status().isBadRequest)
             .andExpect(MockMvcResultMatchers
-                .jsonPath("$.title")
-                .value("Bad request, invalid argumentation.")
+                    .jsonPath("$.title")
+                    .value("Bad request, invalid argumentation.")
             )
             .andExpect(MockMvcResultMatchers.jsonPath("$.timestamp").exists())
             .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
-            .andExpect(
-                MockMvcResultMatchers
+            .andExpect(MockMvcResultMatchers
                     .jsonPath("$.exception")
                     .value("class org.springframework.web.bind.MethodArgumentNotValidException")
             )
             .andExpect(MockMvcResultMatchers.jsonPath("$.details[*]").isNotEmpty)
             .andExpect(MockMvcResultMatchers
-                .jsonPath("$.details[*]")
-                .value("Invalid Email.")
+                    .jsonPath("$.details[*]")
+                    .value("Invalid Email.")
             )
             .andDo(MockMvcResultHandlers.print())
     }
@@ -268,9 +228,9 @@ class CustomerControllerTest : MockEntities() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer(password = "a".repeat(40)))
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-            .post(URL)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(valueAsString)
+                .post(URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(valueAsString)
         )
             .andExpect(MockMvcResultMatchers.status().isCreated)
             .andDo(MockMvcResultHandlers.print())
@@ -281,26 +241,25 @@ class CustomerControllerTest : MockEntities() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer(password = ""))
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-            .post(URL)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(valueAsString)
+                .post(URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(valueAsString)
         )
             .andExpect(MockMvcResultMatchers.status().isBadRequest)
             .andExpect(MockMvcResultMatchers
-                .jsonPath("$.title")
-                .value("Bad request, invalid argumentation.")
+                    .jsonPath("$.title")
+                    .value("Bad request, invalid argumentation.")
             )
             .andExpect(MockMvcResultMatchers.jsonPath("$.timestamp").exists())
             .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
-            .andExpect(
-                MockMvcResultMatchers
+            .andExpect(MockMvcResultMatchers
                     .jsonPath("$.exception")
                     .value("class org.springframework.web.bind.MethodArgumentNotValidException")
             )
             .andExpect(MockMvcResultMatchers.jsonPath("$.details[*]").isNotEmpty)
             .andExpect(MockMvcResultMatchers
-                .jsonPath("$.details[*]")
-                .value("Field 'Password' cannot be empty.")
+                    .jsonPath("$.details[*]")
+                    .value("The password must be between 8 and 40 characters.")
             )
             .andDo(MockMvcResultHandlers.print())
     }
@@ -310,26 +269,25 @@ class CustomerControllerTest : MockEntities() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer(password = "1234567"))
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-            .post(URL)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(valueAsString)
+                .post(URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(valueAsString)
         )
             .andExpect(MockMvcResultMatchers.status().isBadRequest)
             .andExpect(MockMvcResultMatchers
-                .jsonPath("$.title")
-                .value("Bad request, invalid argumentation.")
+                    .jsonPath("$.title")
+                    .value("Bad request, invalid argumentation.")
             )
             .andExpect(MockMvcResultMatchers.jsonPath("$.timestamp").exists())
             .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
-            .andExpect(
-                MockMvcResultMatchers
+            .andExpect(MockMvcResultMatchers
                     .jsonPath("$.exception")
                     .value("class org.springframework.web.bind.MethodArgumentNotValidException")
             )
             .andExpect(MockMvcResultMatchers.jsonPath("$.details[*]").isNotEmpty)
             .andExpect(MockMvcResultMatchers
-                .jsonPath("$.details[*]")
-                .value("The password must be between 8 and 40 characters.")
+                    .jsonPath("$.details[*]")
+                    .value("The password must be between 8 and 40 characters.")
             )
             .andDo(MockMvcResultHandlers.print())
     }
@@ -339,26 +297,25 @@ class CustomerControllerTest : MockEntities() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer(password = "a".repeat(41)))
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-            .post(URL)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(valueAsString)
+                .post(URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(valueAsString)
         )
             .andExpect(MockMvcResultMatchers.status().isBadRequest)
             .andExpect(MockMvcResultMatchers
-                .jsonPath("$.title")
-                .value("Bad request, invalid argumentation.")
+                    .jsonPath("$.title")
+                    .value("Bad request, invalid argumentation.")
             )
             .andExpect(MockMvcResultMatchers.jsonPath("$.timestamp").exists())
             .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
-            .andExpect(
-                MockMvcResultMatchers
+            .andExpect(MockMvcResultMatchers
                     .jsonPath("$.exception")
                     .value("class org.springframework.web.bind.MethodArgumentNotValidException")
             )
             .andExpect(MockMvcResultMatchers.jsonPath("$.details[*]").isNotEmpty)
             .andExpect(MockMvcResultMatchers
-                .jsonPath("$.details[*]")
-                .value("The password must be between 8 and 40 characters.")
+                    .jsonPath("$.details[*]")
+                    .value("The password must be between 8 and 40 characters.")
             )
             .andDo(MockMvcResultHandlers.print())
     }
@@ -368,26 +325,25 @@ class CustomerControllerTest : MockEntities() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer(street = ""))
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-            .post(URL)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(valueAsString)
+                .post(URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(valueAsString)
         )
             .andExpect(MockMvcResultMatchers.status().isBadRequest)
             .andExpect(MockMvcResultMatchers
-                .jsonPath("$.title")
-                .value("Bad request, invalid argumentation.")
+                    .jsonPath("$.title")
+                    .value("Bad request, invalid argumentation.")
             )
             .andExpect(MockMvcResultMatchers.jsonPath("$.timestamp").exists())
             .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
-            .andExpect(
-                MockMvcResultMatchers
+            .andExpect(MockMvcResultMatchers
                     .jsonPath("$.exception")
                     .value("class org.springframework.web.bind.MethodArgumentNotValidException")
             )
             .andExpect(MockMvcResultMatchers.jsonPath("$.details[*]").isNotEmpty)
             .andExpect(MockMvcResultMatchers
-                .jsonPath("$.details[*]")
-                .value("Field 'Street' cannot be empty.")
+                    .jsonPath("$.details[*]")
+                    .value("Field 'Street' cannot be empty.")
             )
             .andDo(MockMvcResultHandlers.print())
     }
