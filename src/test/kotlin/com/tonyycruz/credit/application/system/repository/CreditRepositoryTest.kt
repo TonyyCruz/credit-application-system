@@ -2,7 +2,7 @@ package com.tonyycruz.credit.application.system.repository
 
 import com.tonyycruz.credit.application.system.entity.Credit
 import com.tonyycruz.credit.application.system.entity.Customer
-import com.tonyycruz.credit.application.system.utils.FakeEntitiesBuild
+import com.tonyycruz.credit.application.system.mocks.MockEntities
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -11,12 +11,11 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
 import org.springframework.test.context.ActiveProfiles
-import java.util.Optional
 
 @ActiveProfiles("test")
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class CreditRepositoryTest: FakeEntitiesBuild() {
+class CreditRepositoryTest: MockEntities() {
     @Autowired lateinit var creditRepository: CreditRepository
     @Autowired lateinit var testEntityManager: TestEntityManager
     private lateinit var customer: Customer
@@ -35,7 +34,6 @@ class CreditRepositoryTest: FakeEntitiesBuild() {
 
         Assertions.assertThat(current).isNotNull
         Assertions.assertThat(current).isSameAs(credit1)
-
     }
 
     @Test
