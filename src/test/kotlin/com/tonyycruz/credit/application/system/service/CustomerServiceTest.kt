@@ -4,7 +4,7 @@ import com.tonyycruz.credit.application.system.entity.Customer
 import com.tonyycruz.credit.application.system.exception.NotFoundException
 import com.tonyycruz.credit.application.system.repository.CustomerRepository
 import com.tonyycruz.credit.application.system.service.impl.CustomerService
-import com.tonyycruz.credit.application.system.utils.FakeEntitiesBuild
+import com.tonyycruz.credit.application.system.mocks.MockEntities
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
@@ -19,7 +19,7 @@ import java.util.*
 import kotlin.random.Random
 
 @ExtendWith(MockKExtension::class)
-class CustomerServiceTest: FakeEntitiesBuild() {
+class CustomerServiceTest: MockEntities() {
     @MockK lateinit var customerRepository: CustomerRepository
     @InjectMockKs lateinit var customerService: CustomerService
 

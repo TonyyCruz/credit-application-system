@@ -23,10 +23,9 @@ import org.springframework.web.bind.annotation.RestController
 class CustomerController(private val customerService: CustomerService) {
 
     @PostMapping
-    fun save(@RequestBody @Valid customerDto: CustomerDto): ResponseEntity<String> {
+    fun save(@RequestBody @Valid customerDto: CustomerDto): ResponseEntity<CustomerView> {
         val newCustomer: Customer = customerService.save(customerDto.toEntity())
-        val createdMsg: String = "Customer ${newCustomer.email} saved!"
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdMsg)
+        return ResponseEntity.status(HttpStatus.CREATED).body(CustomerView(newCustomer))
     }
 
     @GetMapping("/{id}")

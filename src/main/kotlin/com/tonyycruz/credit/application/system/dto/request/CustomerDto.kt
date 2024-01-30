@@ -11,18 +11,15 @@ import java.math.BigDecimal
 
 data class CustomerDto(
     @field:NotEmpty(message = "Field 'First Name' cannot be empty.")
-    @field:Length(min = 2, max = 50, message = "First name must be between 2 and 50 characters.")
     val firstName: String,
     @field:NotEmpty(message = "Field 'Last Name' cannot be empty.")
-    @field:Length(min = 2, max = 100, message = "Last name must be between 2 and 100 characters.")
     val lastName: String,
-    @field:NotEmpty(message = "Field 'CPF' cannot be empty.") @field:CPF(message = "Invalid CPF.")
+    @field:CPF(message = "Invalid CPF.")
     val cpf: String,
     @field:NotNull(message = "Field 'Income' cannot be null.")
     val income: BigDecimal,
     @field:NotEmpty(message = "Field 'Email' cannot be empty.") @field:Email(message = "Invalid Email.")
     val email: String,
-    @field:NotEmpty(message = "Field 'Password' cannot be empty.")
     @field:Length(min = 8,  max = 40, message = "The password must be between 8 and 40 characters.")
     val password: String,
     @field:NotEmpty(message = "Field 'Zip Code' cannot be empty.")

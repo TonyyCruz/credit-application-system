@@ -7,7 +7,7 @@ import com.tonyycruz.credit.application.system.exception.UnauthorizedException
 import com.tonyycruz.credit.application.system.repository.CreditRepository
 import com.tonyycruz.credit.application.system.service.impl.CreditService
 import com.tonyycruz.credit.application.system.service.impl.CustomerService
-import com.tonyycruz.credit.application.system.utils.FakeEntitiesBuild
+import com.tonyycruz.credit.application.system.mocks.MockEntities
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
@@ -20,7 +20,7 @@ import java.util.*
 import kotlin.random.Random
 
 @ExtendWith(MockKExtension::class)
-class CreditServiceTest: FakeEntitiesBuild() {
+class CreditServiceTest: MockEntities() {
     @MockK lateinit var creditRepository: CreditRepository
     @InjectMockKs lateinit var creditService: CreditService
     @MockK lateinit var customerService: CustomerService
