@@ -32,7 +32,6 @@ class CustomerControllerGetTest : TestBase()  {
     @Test
     fun `Should not find a customer with invalid id and receive status code 400`() {
         val invalidId: Long = 100L
-        val customer: Customer = buildCustomer(id = 1L)
         mockMvc.perform(MockMvcRequestBuilders
             .get("$URL/$invalidId")
             .contentType(MediaType.APPLICATION_JSON)
