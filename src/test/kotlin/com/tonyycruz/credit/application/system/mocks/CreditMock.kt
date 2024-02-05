@@ -71,6 +71,4 @@ interface CreditMock {
         numberOfInstallments = credit.numberOfInstallments,
         customerId = credit.customer?.id!!
     )
-
-    fun fakeCreditDto(customer: Customer) = creditToDto(fakeCredit(customer = customer))
 }

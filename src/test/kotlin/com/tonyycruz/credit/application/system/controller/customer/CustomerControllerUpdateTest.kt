@@ -1,5 +1,6 @@
-package com.tonyycruz.credit.application.system.controller
+package com.tonyycruz.credit.application.system.controller.customer
 
+import com.tonyycruz.credit.application.system.controller.TestBase
 import com.tonyycruz.credit.application.system.dto.request.CustomerUpdateDto
 import com.tonyycruz.credit.application.system.entity.Customer
 import org.junit.jupiter.api.Test
