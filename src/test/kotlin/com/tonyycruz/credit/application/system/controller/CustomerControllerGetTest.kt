@@ -45,7 +45,7 @@ class CustomerControllerGetTest : TestBase()  {
             )
             .andExpect(MockMvcResultMatchers
                 .jsonPath("$.title")
-                .value("Bad request, the data was not found.")
+                .value("Bad request, the received argument is incorrect.")
             )
             .andExpect(MockMvcResultMatchers.jsonPath("$.details[*]").isNotEmpty)
             .andExpect(MockMvcResultMatchers

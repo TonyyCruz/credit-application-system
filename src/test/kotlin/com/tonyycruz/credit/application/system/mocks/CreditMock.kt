@@ -50,7 +50,7 @@ interface CreditMock {
         creditValue = creditValue,
         dayFirstInstallment = dayFirstInstallment,
         numberOfInstallments = numberOfInstallments,
-        customer = Customer(id = id)
+        customer = Customer(id = customerId)
     )
 
     fun buildManyCredits(quantity: Int, customerId: Long): List<Credit> {
