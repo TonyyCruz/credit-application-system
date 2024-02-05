@@ -50,7 +50,7 @@ class RestExceptionHandler {
     fun notFound(e: NotFoundException): ResponseEntity<ExceptionDetails> {
         return ResponseEntity(
             ExceptionDetails(
-                title = "Bad request, the data was not found.",
+                title = "Bad request, the received argument is incorrect.",
                 timestamp = LocalDateTime.now(),
                 status = HttpStatus.BAD_REQUEST.value(),
                 exception = e.javaClass.toString(),

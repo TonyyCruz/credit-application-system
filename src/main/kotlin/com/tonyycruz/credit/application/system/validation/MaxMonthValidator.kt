@@ -5,7 +5,7 @@ import jakarta.validation.ConstraintValidatorContext
 import java.time.LocalDate
 
 class MaxMonthValidator: ConstraintValidator<MaxMonth, LocalDate> {
-    private var maxMonth: Long = 0
+    private var maxMonth: Long = 0L
 
     override fun initialize(maxMonth: MaxMonth) {
         this.maxMonth = maxMonth.max

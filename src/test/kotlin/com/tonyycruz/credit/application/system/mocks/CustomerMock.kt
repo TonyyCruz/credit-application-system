@@ -1,22 +1,23 @@
 package com.tonyycruz.credit.application.system.mocks
 
 import com.tonyycruz.credit.application.system.dto.request.CustomerDto
+import com.tonyycruz.credit.application.system.dto.request.CustomerUpdateDto
 import com.tonyycruz.credit.application.system.entity.Address
 import com.tonyycruz.credit.application.system.entity.Customer
+import com.tonyycruz.credit.application.system.utils.Fake
 import java.math.BigDecimal
 import java.math.RoundingMode
 import kotlin.random.Random
 
 interface CustomerMock {
-
     fun fakeCustomer(
-        firstName: String = "Tony",
-        lastName: String = "Cruz",
+        firstName: String = Fake().firstName(),
+        lastName: String = Fake().lastName(),
         cpf: String = "28475934625",
-        email: String = "tony@email.com",
-        password: String = "123456789",
-        zipCode: String = "123456789",
-        street: String = "Alameda dos Anjos",
+        email: String = Fake().email(),
+        password: String = Fake().password(),
+        zipCode: String = Fake().zipCode(),
+        street: String = Fake().street(),
         income: BigDecimal = Random.nextDouble(0.0, 10000.0).toBigDecimal().setScale(2, RoundingMode.DOWN),
     ) = Customer(
         firstName = firstName,
@@ -31,7 +32,7 @@ interface CustomerMock {
         )
     )
 
-    fun customerToDto(customer: Customer) = CustomerDto(
+    fun customerToDto(customer: Customer): CustomerDto = CustomerDto(
         firstName = customer.firstName,
         lastName = customer.lastName,
         cpf = customer.cpf,
@@ -42,7 +43,13 @@ interface CustomerMock {
         street = customer.address.street
     )
 
-    fun fakeCustomerDto() = customerToDto(fakeCustomer())
+    fun customerToUpdateDto(customer: Customer): CustomerUpdateDto = CustomerUpdateDto(
+        firstName = customer.firstName,
+        lastName = customer.lastName,
+        income = customer.income,
+        zipCode = customer.address.zipCode,
+        street = customer.address.street
+    )
 
     fun buildCustomer(id: Long = 1L, customer: Customer = fakeCustomer()): Customer {
         customer.id = id
