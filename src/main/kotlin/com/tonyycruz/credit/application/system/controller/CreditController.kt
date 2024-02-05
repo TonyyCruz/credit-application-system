@@ -22,13 +22,9 @@ import java.util.UUID
 class CreditController(private val creditService: CreditService) {
 
     @PostMapping
-    fun save(@RequestBody @Valid creditDto: CreditDto): ResponseEntity<String> {
+    fun save(@RequestBody @Valid creditDto: CreditDto): ResponseEntity<CreditView> {
         val credit: Credit = creditService.save(creditDto.toEntity())
-        val responseMsg = "Credit successfully created!\n" +
-                "code: ${credit.creditCode}\n" +
-                "customer: ${credit.customer?.firstName}\n" +
-                "value: ${credit.creditValue}\n"
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseMsg)
+        return ResponseEntity.status(HttpStatus.CREATED).body(CreditView(credit))
     }
 
     @GetMapping
@@ -42,7 +38,8 @@ class CreditController(private val creditService: CreditService) {
     @GetMapping("/{creditCode}")
     fun findByCreditCode(
         @RequestParam("customerId") customerId: Long,
-        @PathVariable creditCode: UUID): ResponseEntity<CreditView> {
+        @PathVariable creditCode: UUID
+    ): ResponseEntity<CreditView> {
         val credit: Credit = creditService.findByCreditCode(customerId, creditCode)
         return ResponseEntity.ok(CreditView(credit))
     }
