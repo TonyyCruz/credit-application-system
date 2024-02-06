@@ -15,7 +15,7 @@ class CustomerControllerPostTest : TestBase() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer())
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-                .post(URL)
+                .post(CUSTOMER_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(valueAsString)
         )
@@ -37,7 +37,7 @@ class CustomerControllerPostTest : TestBase() {
         customerRepository.save(customerDto.toEntity())
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-                .post(URL)
+                .post(CUSTOMER_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(valueAsString)
         )
@@ -61,7 +61,7 @@ class CustomerControllerPostTest : TestBase() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer(firstName = ""))
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-                .post(URL)
+                .post(CUSTOMER_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(valueAsString)
         )
@@ -89,7 +89,7 @@ class CustomerControllerPostTest : TestBase() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer(lastName = ""))
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-                .post(URL)
+                .post(CUSTOMER_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(valueAsString)
         )
@@ -117,7 +117,7 @@ class CustomerControllerPostTest : TestBase() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer(cpf = ""))
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-                .post(URL)
+                .post(CUSTOMER_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(valueAsString)
         )
@@ -145,7 +145,7 @@ class CustomerControllerPostTest : TestBase() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer(cpf = "111111111"))
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-                .post(URL)
+                .post(CUSTOMER_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(valueAsString)
         )
@@ -173,7 +173,7 @@ class CustomerControllerPostTest : TestBase() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer(email = ""))
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-                .post(URL)
+                .post(CUSTOMER_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(valueAsString)
         )
@@ -201,7 +201,7 @@ class CustomerControllerPostTest : TestBase() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer(email = "test"))
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-                .post(URL)
+                .post(CUSTOMER_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(valueAsString)
         )
@@ -229,7 +229,7 @@ class CustomerControllerPostTest : TestBase() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer(password = "a".repeat(40)))
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-                .post(URL)
+                .post(CUSTOMER_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(valueAsString)
         )
@@ -242,7 +242,7 @@ class CustomerControllerPostTest : TestBase() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer(password = ""))
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-                .post(URL)
+                .post(CUSTOMER_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(valueAsString)
         )
@@ -270,7 +270,7 @@ class CustomerControllerPostTest : TestBase() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer(password = "1234567"))
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-                .post(URL)
+                .post(CUSTOMER_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(valueAsString)
         )
@@ -298,7 +298,7 @@ class CustomerControllerPostTest : TestBase() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer(password = "a".repeat(41)))
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-                .post(URL)
+                .post(CUSTOMER_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(valueAsString)
         )
@@ -326,7 +326,7 @@ class CustomerControllerPostTest : TestBase() {
         val customerDto: CustomerDto = customerToDto(fakeCustomer(street = ""))
         val valueAsString: String = objectMapper.writeValueAsString(customerDto)
         mockMvc.perform(MockMvcRequestBuilders
-                .post(URL)
+                .post(CUSTOMER_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(valueAsString)
         )

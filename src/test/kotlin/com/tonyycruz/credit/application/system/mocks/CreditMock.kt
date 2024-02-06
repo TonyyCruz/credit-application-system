@@ -12,8 +12,8 @@ import kotlin.random.Random
 interface CreditMock {
 
     fun fakeCredit(
-        creditValue: BigDecimal = Random.nextDouble(0.0, 5000.0).toBigDecimal().setScale(2, RoundingMode.DOWN),
-        dayFirstInstallment: LocalDate = LocalDate.now().plusMonths(1),
+        creditValue: BigDecimal = Random.nextBigDecimal(0.0, 5000.0),
+        dayFirstInstallment: LocalDate = LocalDate.now().plusMonths(Random.nextLong(1, 3)),
         numberOfInstallments: Int = Random.nextInt(1, 48),
         customer: Customer
     ) = Credit(
@@ -25,8 +25,8 @@ interface CreditMock {
 
     fun buildCredit(
         id: Long = Random.nextLong(),
-        creditValue: BigDecimal = Random.nextDouble(0.0, 5000.0).toBigDecimal().setScale(2, RoundingMode.DOWN),
-        dayFirstInstallment: LocalDate = LocalDate.now().plusMonths(1),
+        creditValue: BigDecimal = Random.nextBigDecimal(0.0, 5000.0),
+        dayFirstInstallment: LocalDate = LocalDate.now().plusMonths(Random.nextLong(1, 3)),
         numberOfInstallments: Int = Random.nextInt(1, 48),
         customer: Customer
     ) = Credit(
@@ -41,8 +41,8 @@ interface CreditMock {
     fun buildCredit(
         id: Long = Random.nextLong(),
         customerId: Long = 1L,
-        creditValue: BigDecimal = Random.nextDouble(0.0, 5000.0).toBigDecimal().setScale(2, RoundingMode.DOWN),
-        dayFirstInstallment: LocalDate = LocalDate.now().plusMonths(1),
+        creditValue: BigDecimal = Random.nextBigDecimal(0.0, 5000.0),
+        dayFirstInstallment: LocalDate = LocalDate.now().plusMonths(Random.nextLong(1, 3)),
         numberOfInstallments: Int = Random.nextInt(1, 48),
     ) = Credit(
         id = id,
@@ -71,4 +71,10 @@ interface CreditMock {
         numberOfInstallments = credit.numberOfInstallments,
         customerId = credit.customer?.id!!
     )
+
+    private fun Random.nextBigDecimal(from: Double, until: Double): BigDecimal {
+        return Random
+            .nextDouble(from, until)
+            .toBigDecimal().setScale(1, RoundingMode.DOWN)
+    }
 }

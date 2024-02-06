@@ -56,10 +56,9 @@ interface CustomerMock {
         return customer
     }
 
-    fun Random.nextBigDecimal(from: Double, until: Double): BigDecimal {
+    private fun Random.nextBigDecimal(from: Double, until: Double): BigDecimal {
         return Random
             .nextDouble(from, until)
-            .toBigDecimal().setScale(2, RoundingMode.DOWN)
-            .stripTrailingZeros()
+            .toBigDecimal().setScale(1, RoundingMode.DOWN)
     }
 }

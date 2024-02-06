@@ -14,7 +14,7 @@ class CustomerControllerDeleteTest : TestBase() {
     fun `Should delete a customer by id and return status code 204`() {
         val customer: Customer = customerRepository.save(fakeCustomer())
         mockMvc.perform(MockMvcRequestBuilders
-            .delete("$URL/${customer.id}")
+            .delete("$CUSTOMER_URL/${customer.id}")
             .contentType(MediaType.APPLICATION_JSON)
         )
             .andExpect(MockMvcResultMatchers.status().isNoContent)
@@ -25,7 +25,7 @@ class CustomerControllerDeleteTest : TestBase() {
     fun `Should not delete a customer with invalid id and return status code 400`() {
         val invalidId: Long = 100L
         mockMvc.perform(MockMvcRequestBuilders
-                .delete("$URL/$invalidId")
+                .delete("$CUSTOMER_URL/$invalidId")
                 .contentType(MediaType.APPLICATION_JSON)
         )
             .andExpect(MockMvcResultMatchers.status().isBadRequest)

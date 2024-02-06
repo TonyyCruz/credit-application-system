@@ -28,7 +28,8 @@ class TestBase : MockEntities() {
     protected lateinit var objectMapper: ObjectMapper
 
     companion object {
-        const val URL: String = "/api/customers"
+        const val CUSTOMER_URL: String = "/api/customers"
+        const val CREDIT_URL: String = "/api/credits"
     }
 
     @BeforeEach

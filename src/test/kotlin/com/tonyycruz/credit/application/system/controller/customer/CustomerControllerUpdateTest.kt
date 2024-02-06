@@ -17,7 +17,7 @@ class CustomerControllerUpdateTest : TestBase() {
         val customerUpdateDto: CustomerUpdateDto = customerToUpdateDto(fakeCustomer())
         val valueAsString: String = objectMapper.writeValueAsString(customerUpdateDto)
         mockMvc.perform(MockMvcRequestBuilders
-            .patch("$URL/${customer.id}")
+            .patch("$CUSTOMER_URL/${customer.id}")
             .contentType(MediaType.APPLICATION_JSON)
             .content(valueAsString)
         )
@@ -35,7 +35,7 @@ class CustomerControllerUpdateTest : TestBase() {
     fun `Should not delete a customer with invalid id and return status code 400`() {
         val invalidId: Long = 100L
         mockMvc.perform(MockMvcRequestBuilders
-                .delete("$URL/$invalidId")
+                .delete("$CUSTOMER_URL/$invalidId")
                 .contentType(MediaType.APPLICATION_JSON)
         )
             .andExpect(MockMvcResultMatchers.status().isBadRequest)
@@ -63,7 +63,7 @@ class CustomerControllerUpdateTest : TestBase() {
         val customerUpdateDto: CustomerUpdateDto = customerToUpdateDto(fakeCustomer(firstName = ""))
         val valueAsString: String = objectMapper.writeValueAsString(customerUpdateDto)
         mockMvc.perform(MockMvcRequestBuilders
-            .patch("$URL/${customer.id}")
+            .patch("$CUSTOMER_URL/${customer.id}")
             .contentType(MediaType.APPLICATION_JSON)
             .content(valueAsString)
         )
@@ -92,7 +92,7 @@ class CustomerControllerUpdateTest : TestBase() {
         val customerUpdateDto: CustomerUpdateDto = customerToUpdateDto(fakeCustomer(lastName = ""))
         val valueAsString: String = objectMapper.writeValueAsString(customerUpdateDto)
         mockMvc.perform(MockMvcRequestBuilders
-            .patch("$URL/${customer.id}")
+            .patch("$CUSTOMER_URL/${customer.id}")
             .contentType(MediaType.APPLICATION_JSON)
             .content(valueAsString)
         )
@@ -121,7 +121,7 @@ class CustomerControllerUpdateTest : TestBase() {
         val customerUpdateDto: CustomerUpdateDto = customerToUpdateDto(fakeCustomer(zipCode = ""))
         val valueAsString: String = objectMapper.writeValueAsString(customerUpdateDto)
         mockMvc.perform(MockMvcRequestBuilders
-            .patch("$URL/${customer.id}")
+            .patch("$CUSTOMER_URL/${customer.id}")
             .contentType(MediaType.APPLICATION_JSON)
             .content(valueAsString)
         )
@@ -150,7 +150,7 @@ class CustomerControllerUpdateTest : TestBase() {
         val customerUpdateDto: CustomerUpdateDto = customerToUpdateDto(fakeCustomer(street = ""))
         val valueAsString: String = objectMapper.writeValueAsString(customerUpdateDto)
         mockMvc.perform(MockMvcRequestBuilders
-            .patch("$URL/${customer.id}")
+            .patch("$CUSTOMER_URL/${customer.id}")
             .contentType(MediaType.APPLICATION_JSON)
             .content(valueAsString)
         )
