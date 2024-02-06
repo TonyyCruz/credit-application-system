@@ -75,6 +75,6 @@ interface CreditMock {
     private fun Random.nextBigDecimal(from: Double, until: Double): BigDecimal {
         return Random
             .nextDouble(from, until)
-            .toBigDecimal().setScale(1, RoundingMode.DOWN)
+            .toBigDecimal().setScale(2, RoundingMode.DOWN)
     }
 }
