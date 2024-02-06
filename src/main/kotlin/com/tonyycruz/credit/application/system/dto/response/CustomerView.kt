@@ -2,6 +2,7 @@ package com.tonyycruz.credit.application.system.dto.response
 
 import com.tonyycruz.credit.application.system.entity.Customer
 import java.math.BigDecimal
+import java.math.RoundingMode
 
 data class CustomerView(
     val id: Long?,
@@ -18,7 +19,7 @@ data class CustomerView(
         firstName = customer.firstName,
         lastName = customer.lastName,
         cpf = customer.cpf,
-        income = customer.income,
+        income = customer.income.setScale(2, RoundingMode.DOWN),
         email = customer.email,
         zipCode = customer.address.zipCode,
         street = customer.address.street

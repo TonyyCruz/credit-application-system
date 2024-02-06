@@ -18,7 +18,7 @@ interface CustomerMock {
         password: String = Fake().password(),
         zipCode: String = Fake().zipCode(),
         street: String = Fake().street(),
-        income: BigDecimal = Random.nextDouble(0.0, 10000.0).toBigDecimal().setScale(2, RoundingMode.DOWN),
+        income: BigDecimal = Random.nextBigDecimal(0.0, 10000.0),
     ) = Customer(
         firstName = firstName,
         lastName = lastName,
@@ -54,5 +54,11 @@ interface CustomerMock {
     fun buildCustomer(id: Long = 1L, customer: Customer = fakeCustomer()): Customer {
         customer.id = id
         return customer
+    }
+
+    private fun Random.nextBigDecimal(from: Double, until: Double): BigDecimal {
+        return Random
+            .nextDouble(from, until)
+            .toBigDecimal().setScale(1, RoundingMode.DOWN)
     }
 }

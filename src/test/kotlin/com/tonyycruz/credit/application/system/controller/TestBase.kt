@@ -2,6 +2,7 @@ package com.tonyycruz.credit.application.system.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.tonyycruz.credit.application.system.mocks.MockEntities
+import com.tonyycruz.credit.application.system.repository.CreditRepository
 import com.tonyycruz.credit.application.system.repository.CustomerRepository
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -22,13 +23,17 @@ class TestBase : MockEntities() {
     protected lateinit var customerRepository: CustomerRepository
 
     @Autowired
+    protected lateinit var creditRepository: CreditRepository
+
+    @Autowired
     protected lateinit var mockMvc: MockMvc
 
     @Autowired
     protected lateinit var objectMapper: ObjectMapper
 
     companion object {
-        const val URL: String = "/api/customers"
+        const val CUSTOMER_URL: String = "/api/customers"
+        const val CREDIT_URL: String = "/api/credits"
     }
 
     @BeforeEach

@@ -4,10 +4,10 @@ import com.tonyycruz.credit.application.system.entity.Credit
 import com.tonyycruz.credit.application.system.entity.Customer
 import com.tonyycruz.credit.application.system.exception.NotFoundException
 import com.tonyycruz.credit.application.system.exception.UnauthorizedException
+import com.tonyycruz.credit.application.system.mocks.MockEntities
 import com.tonyycruz.credit.application.system.repository.CreditRepository
 import com.tonyycruz.credit.application.system.service.impl.CreditService
 import com.tonyycruz.credit.application.system.service.impl.CustomerService
-import com.tonyycruz.credit.application.system.mocks.MockEntities
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
@@ -42,6 +42,7 @@ class CreditServiceTest: MockEntities() {
         val customerId: Long = 1120L
         val fakeCreditList: List<Credit> = buildManyCredits(quantity = 5, customerId = customerId)
         every { creditRepository.findAllByCustomerId(customerId) } returns fakeCreditList
+        every { customerService.findById(customerId) } returns Customer(id = customerId)
         val current = creditService.findAllByCustomerId(customerId)
 
         Assertions.assertThat(current).isNotEmpty

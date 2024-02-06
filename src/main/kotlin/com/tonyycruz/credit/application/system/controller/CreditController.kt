@@ -8,27 +8,17 @@ import com.tonyycruz.credit.application.system.service.impl.CreditService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
-import java.util.UUID
+import org.springframework.web.bind.annotation.*
+import java.util.*
 
 @RestController
 @RequestMapping("/api/credits")
 class CreditController(private val creditService: CreditService) {
 
     @PostMapping
-    fun save(@RequestBody @Valid creditDto: CreditDto): ResponseEntity<String> {
+    fun save(@RequestBody @Valid creditDto: CreditDto): ResponseEntity<CreditView> {
         val credit: Credit = creditService.save(creditDto.toEntity())
-        val responseMsg = "Credit successfully created!\n" +
-                "code: ${credit.creditCode}\n" +
-                "customer: ${credit.customer?.firstName}\n" +
-                "value: ${credit.creditValue}\n"
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseMsg)
+        return ResponseEntity.status(HttpStatus.CREATED).body(CreditView(credit))
     }
 
     @GetMapping
@@ -42,7 +32,8 @@ class CreditController(private val creditService: CreditService) {
     @GetMapping("/{creditCode}")
     fun findByCreditCode(
         @RequestParam("customerId") customerId: Long,
-        @PathVariable creditCode: UUID): ResponseEntity<CreditView> {
+        @PathVariable creditCode: UUID
+    ): ResponseEntity<CreditView> {
         val credit: Credit = creditService.findByCreditCode(customerId, creditCode)
         return ResponseEntity.ok(CreditView(credit))
     }

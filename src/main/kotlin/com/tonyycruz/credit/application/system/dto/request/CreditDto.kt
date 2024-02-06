@@ -13,8 +13,8 @@ import java.time.LocalDate
 data class CreditDto(
     @field:NotNull(message = "Field 'Credit Value' cannot be null.")
     val creditValue: BigDecimal,
-    @MaxMonth(max = 10, message = "The first installment cannot exceed three months.")
-    @field:Future
+    @MaxMonth(max = 3, message = "The first installment cannot exceed three months.")
+    @field:Future(message = "The first installment must be a future date")
     val dayFirstInstallment: LocalDate,
     @field:Min(1, message = "Installments must be at least 1.")
     @field:Max(48, message = "Installment must be up to 48.")
@@ -22,7 +22,6 @@ data class CreditDto(
     @field:NotNull(message = "Field 'Customer Id' cannot be null.")
     val customerId: Long
 ) {
-
     fun toEntity(): Credit = Credit(
         creditValue = this.creditValue,
         dayFirstInstallment = this.dayFirstInstallment,

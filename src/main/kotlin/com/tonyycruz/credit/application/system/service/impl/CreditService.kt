@@ -1,11 +1,9 @@
 package com.tonyycruz.credit.application.system.service.impl
 
 import com.tonyycruz.credit.application.system.entity.Credit
-import com.tonyycruz.credit.application.system.entity.Customer
 import com.tonyycruz.credit.application.system.exception.NotFoundException
 import com.tonyycruz.credit.application.system.exception.UnauthorizedException
 import com.tonyycruz.credit.application.system.repository.CreditRepository
-import com.tonyycruz.credit.application.system.repository.CustomerRepository
 import com.tonyycruz.credit.application.system.service.ICreditService
 import org.springframework.stereotype.Service
 import java.util.*
@@ -24,6 +22,7 @@ class CreditService(
     }
 
     override fun findAllByCustomerId(id: Long): List<Credit> {
+        customerService.findById(id)
         return creditRepository.findAllByCustomerId(id)
     }
 
