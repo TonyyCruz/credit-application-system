@@ -2,6 +2,11 @@
 
 <p>API Rest para um Sistema de Analise de Solicitação de Crédito</p>
 
+<p>
+  Projeto Credit application system, desenvolvido em Kotlin com Spring Boot.
+  Foi feita uma aplicação para simular uma empresa de empréstimos, contando com o cadastro de usuários e suas requisições e controle de credito através de uma API REST.
+</p>
+
 <a href = "https://gist.github.com/cami-la/560b455b901778391abd2c9edea81286">Descrição do Projeto</a>
 
 ---
