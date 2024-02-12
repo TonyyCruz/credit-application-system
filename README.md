@@ -31,7 +31,7 @@
 
 ### 🚀 Como executar o projeto
 
-É necessário ter o <a href="https://docs.docker.com/get-started/overview/">Docker</a> instalado.
+É recomendado ter o <a href="https://docs.docker.com/get-started/overview/">Docker</a> instalado.
 
 _Clonar e acessar a pasta do projeto_
 
@@ -44,9 +44,32 @@ _Subir a aplicação em docker_
   docker-compose up -d --build
 ```
 
-### Após isso, sua aplicação já estará ativa!
+- Caso opte por rodar sem docker, abra o projeto com sua IDE de preferência, instale as dependências e inicie o projeto.
+
+### Após isso, a aplicação já estará ativa!
+  A aplicação estará em um contêiner chamado `credit-application-system_app`.
 
 ---
 
 <h4>O Swagger estará visível nessa rota: <a href="http://localhost:8080/swagger-ui/index.html">Aqui!</a></h4>
 <h4>O H2-database estará visível nessa rota: <a href="http://localhost:8080/swagger-ui/index.html">Aqui!</a></h4>
+
+---
+
+<details>
+  <summary><strong>:computer: Regras de negócio</strong></summary><br/>
+  <h3>Cliente:</h3>
+  
+  - Todos os campos são obrigatórios.
+  - CPF deve ser válido.
+  - Email deve ser válido.
+  - Password deve ter entre 8 e 40 characteres.
+    
+  ---
+
+  <h3>Crédito:</h3>
+  
+  - Todos os campos são obrigatórios.
+  - Dia do primeiro pagamento deve ser uma data futura de no máximo três meses.
+  - Numeo de pagamentos devem ser entre 1 e 48.
+</details>
