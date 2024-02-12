@@ -1,5 +1,5 @@
 <h1 align="center">Project: Creadit application system</h1>
-<p align="center">Neste projeto, foi desenvolvidos uma API Rest para um Sistema de Analise de Solicitação de Crédito.</p>
+<p align="center">Neste projeto, foi desenvolvida uma API Rest para um Sistema de Analise de créditos para uma empresa de empréstimos.</p>
 
 ---
 
