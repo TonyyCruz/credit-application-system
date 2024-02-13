@@ -75,3 +75,10 @@ _Subir a aplicação em docker_
   - Dia do primeiro pagamento deve ser uma data futura de no máximo três meses.
   - Numeo de pagamentos devem ser entre 1 e 48.
 </details>
+
+---
+
+Remova o container e a imagem com:
+```jsx 
+docker rm -f credit-application && docker image rm credit-application-system_app
+```
