@@ -47,7 +47,7 @@ _Subir a aplicação em docker_
 - Caso opte por rodar sem docker, abra o projeto com sua IDE de preferência, instale as dependências e inicie o projeto.
 
 ### Após isso, a aplicação já estará ativa!
-  A aplicação estará em um contêiner chamado `credit-application-system_app`.
+  A aplicação estará em um contêiner chamado `credit-application`.
 
 ---
 
