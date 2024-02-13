@@ -54,6 +54,8 @@ _Subir a aplicação em docker_
 <h4>O Swagger estará visível nessa rota: <a href="http://localhost:8080/swagger-ui/index.html">Aqui!</a></h4>
 <h4>O H2-database estará visível nessa rota: <a href="http://localhost:8080/swagger-ui/index.html">Aqui!</a></h4>
 
+<p>Ps: Ao acessar o H2-database, em "JDBC URL" preencha o campo com `jdbc:h2:mem:credit-application-system_DB` , o "UserName" é `sa` e o password é vazio.</p>
+
 ---
 
 <details>
