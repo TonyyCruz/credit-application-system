@@ -21,7 +21,7 @@
 <p>Diagrama UML Simplificado do projéto</p>
 <picture><img
            height="400px"
-           src="https://camo.githubusercontent.com/33acbb87760a5320ad4ad00fa6a49db79fc8c9142114d93c147e270b23236d48/68747470733a2f2f692e696d6775722e636f6d2f377068796131362e706e67"
+           src="https://i.ibb.co/Svpttqx/credit-application-system-uml.png"
            alt="Diagrama"
            />
 </picture>
