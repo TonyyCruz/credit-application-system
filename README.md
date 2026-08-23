@@ -41,13 +41,20 @@ git clone git@github.com:TonyyCruz/credit-application-system.git && cd credit-ap
 
 _Subir a aplicação em docker_
 ```jsx
-  docker-compose up -d --build
+  sudo docker compose up -d --build
 ```
 
 - Caso opte por rodar sem docker, abra o projeto com sua IDE de preferência, instale as dependências e inicie o projeto.
 
 ### Após isso, a aplicação já estará ativa!
   A aplicação estará em um contêiner chamado `credit-application`.
+
+### Removendo o contêiner
+
+  _Após o uso, utilize o comando_
+```jsx
+  sudo docker compose down -v
+```
 
 ---
 
